@@ -6,13 +6,54 @@
         <title>Upload de ZIP</title>
     </head>
     <body>
-        <h1>Upload de Arquivo ZIP</h1>
+        <h1>Upload your zip</h1>
         <form id="uploadForm" enctype="multipart/form-data">
             <input type="file" name="file" accept=".zip" required />
-            <button type="submit">Enviar</button>
+            <button type="submit">Send</button>
         </form>
         <div id="result"></div>
+        <style>
+            body {
+                background-color: #333;
+                color: white;
 
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+            }
+            body {
+                font-family: sans-serif;
+            }
+            input[type="file"] {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+
+            button {
+                background-color: #007bff;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            h1 {
+                text-align: center;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        </style>
         <script>
             document
                 .getElementById("uploadForm")
@@ -31,11 +72,11 @@
                         a.href = url;
                         a.download = "modified.zip";
                         document.getElementById("result").innerHTML =
-                            "Arquivo modificado pronto para download!";
+                            "The modifications were made!";
                         a.click();
                     } else {
                         document.getElementById("result").innerHTML =
-                            "Erro ao fazer upload do arquivo.";
+                            "Error uploading file.";
                     }
                 });
         </script>
