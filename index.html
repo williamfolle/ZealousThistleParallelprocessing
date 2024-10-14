@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Upload de ZIP</title>
+    </head>
+    <body>
+        <h1>Upload de Arquivo ZIP</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".zip" required />
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="result"></div>
+
+        <script>
+            document
+                .getElementById("uploadForm")
+                .addEventListener("submit", async (event) => {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    const response = await fetch("/upload", {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = "modified.zip";
+                        document.getElementById("result").innerHTML =
+                            "Arquivo modificado pronto para download!";
+                        a.click();
+                    } else {
+                        document.getElementById("result").innerHTML =
+                            "Erro ao fazer upload do arquivo.";
+                    }
+                });
+        </script>
+    </body>
+</html>
